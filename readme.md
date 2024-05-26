@@ -1,4 +1,4 @@
-1. Titulo
+<h3>1. Titulo</h3>
 Desarrollo de una aplicación web para la gestión y consulta del archivo histórico de calificaciones de la Facultad de Ciencias Artes y Tecnologías.
 
 2. Justificación:

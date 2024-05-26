@@ -138,6 +138,31 @@ class Usuarios {
             return false;
         }
     }
+    /* LOGIN */
+
+    public function login($username, $password) {
+        $query = "SELECT u.id, u.username, u.user_nombre, r.rol_name as role
+                  FROM " . $this->table . " u
+                  JOIN usr_roles ur ON u.id = ur.usr_id
+                  JOIN roles r ON ur.rol_id = r.id
+                  WHERE u.username = ? AND u.password = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if ($stmt === false) {
+            throw new Exception('Error al preparar la declaración: ' . $this->conn->error);
+        }
+
+        $stmt->bind_param('ss', $username, $password);
+
+        if ($stmt->execute() === false) {
+            throw new Exception('Error al ejecutar la declaración: ' . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    /* FIN LOGIN*/
 }
 ?>
 

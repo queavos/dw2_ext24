@@ -2,7 +2,8 @@
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Oportunidades.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $opor_code = $_POST['opor_code'];
     $opor_name = $_POST['opor_name'];

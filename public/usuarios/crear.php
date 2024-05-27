@@ -3,7 +3,8 @@ require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Usuarios.php';
 require_once '../../classes/Roles.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_nombre = $_POST['user_nombre'];
     $user_mail = $_POST['user_mail'];

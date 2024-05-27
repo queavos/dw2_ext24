@@ -2,7 +2,8 @@
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Materias.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador', 'Secretario']);
 $database = new Database();
 $db = $database->connect();
 

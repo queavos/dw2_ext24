@@ -2,7 +2,8 @@
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Facultades.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador', 'Secretario']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $facu_code = $_POST['facu_code'];
     $facu_name = $_POST['facu_name'];

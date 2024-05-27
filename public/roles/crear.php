@@ -2,7 +2,8 @@
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Roles.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rol_name = $_POST['rol_name'];
 

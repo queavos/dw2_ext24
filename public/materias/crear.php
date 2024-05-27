@@ -4,7 +4,8 @@ require_once '../../classes/Database.php';
 require_once '../../classes/Materias.php';
 require_once '../../classes/Carreras.php';
 require_once '../../classes/Profesores.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador', 'Secretario']);
 $error = '';
 
 $database = new Database();

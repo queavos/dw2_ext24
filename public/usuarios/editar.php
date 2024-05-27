@@ -3,7 +3,8 @@ require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Usuarios.php';
 require_once '../../classes/Roles.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador']);
 $database = new Database();
 $db = $database->connect();
 

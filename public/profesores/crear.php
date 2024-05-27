@@ -2,7 +2,8 @@
 require_once '../../config/database.php';
 require_once '../../classes/Database.php';
 require_once '../../classes/Profesores.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador', 'Secretario']);
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -41,7 +41,7 @@ class Usuarios {
 
     // Método para obtener todos los usuarios
     public function obtenerUsuarios() {
-        $query = "SELECT u.id, u.user_nombre, u.user_mail, u.username, GROUP_CONCAT(r.rol_name SEPARATOR ', ') AS roles
+        $query = "SELECT u.id, u.user_nombre, u.user_mail, u.username, GROUP_CONCAT(r.rol_name SEPARATOR ', ') AS roles, GROUP_CONCAT(ur.rol_id SEPARATOR ', ') AS roles_id
                   FROM " . $this->table . " u
                   LEFT JOIN usr_roles ur ON u.id = ur.usr_id
                   LEFT JOIN roles r ON ur.rol_id = r.id
@@ -163,6 +163,25 @@ class Usuarios {
     }
 
     /* FIN LOGIN*/
-}
+    /* Cambiar contraseña */
+    public function cambiarContrasena($user_id, $new_password) {
+        $query = "UPDATE " . $this->table . " SET password = ?, updated_date_time = NOW() WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if ($stmt === false) {
+            throw new Exception('Error al preparar la declaración: ' . $this->conn->error);
+        }
+
+        $new_password_hashed = sha1($new_password);
+        $stmt->bind_param('si', $new_password_hashed, $user_id);
+
+        if ($stmt->execute() === false) {
+            throw new Exception('Error al ejecutar la declaración: ' . $stmt->error);
+        }
+
+        return true;
+    }
+    /* Fin cambiar contraseña */ 
+     }
 ?>
 

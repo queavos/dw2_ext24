@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 function isLoggedIn() {
@@ -19,4 +20,6 @@ function restrictAccess($role = null) {
         exit();
     }
 }
+// URL base para archivos
+define('BASE_URL', 'http://localhost:88/actas/uploads/');
 ?>

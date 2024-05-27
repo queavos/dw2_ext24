@@ -5,7 +5,8 @@ require_once '../../classes/Actas.php';
 require_once '../../classes/Materias.php';
 require_once '../../classes/Oportunidades.php';
 require_once '../../classes/Usuarios.php';
-
+require_once '../../config/config.php';
+restrictAccess(['Administrador', 'Secretario']);
 $database = new Database();
 $db = $database->connect();
 

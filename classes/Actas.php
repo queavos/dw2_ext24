@@ -71,11 +71,12 @@ class Actas {
 
     // Método para obtener todas las actas con los nombres de las materias, oportunidades y usuarios
     public function obtenerActas() {
-        $query = "SELECT a.id, a.acta_codi, a.acta_fecha, a.acta_archivo, a.acta_recibido, a.acta_planilla, CONCAT(m.mate_code, ' - ', m.mate_name) AS materia, o.opor_code, u.user_nombre 
+        $query = "SELECT a.id, a.acta_codi, a.acta_fecha, a.acta_archivo, a.acta_recibido, a.acta_planilla,a.mate_id ,CONCAT(m.mate_code, ' - ', m.mate_name) AS materia,m.doce_id,CONCAT(d.doce_apellido, ' ', d.doce_nombre) AS docente ,a.opor_id ,o.opor_code,a.usr_id, u.user_nombre 
                   FROM " . $this->table . " a 
                   JOIN materias m ON a.mate_id = m.id 
                   JOIN oportunidades o ON a.opor_id = o.id 
-                  JOIN usuarios u ON a.usr_id = u.id";
+                  JOIN usuarios u ON a.usr_id = u.id 
+                  JOIN docentes d ON m.doce_id= d.id ";
         $result = $this->conn->query($query);
 
         // Verificar si la consulta fue exitosa

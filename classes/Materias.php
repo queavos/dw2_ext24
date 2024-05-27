@@ -34,7 +34,7 @@ class Materias {
 
     // Método para obtener todas las materias con la sigla de la carrera y el nombre completo del docente
     public function obtenerMaterias() {
-        $query = "SELECT m.id, m.mate_code, m.mate_name, m.mate_anho, c.carre_sigla, CONCAT(d.doce_apellido, ' ', d.doce_nombre) AS docente 
+        $query = "SELECT m.id, m.mate_code, m.mate_name, m.mate_anho, m.carre_id,c.carre_sigla,m.doce_id, CONCAT(d.doce_apellido, ' ', d.doce_nombre) AS docente 
                   FROM " . $this->table . " m 
                   JOIN carreras c ON m.carre_id = c.id 
                   JOIN docentes d ON m.doce_id = d.id";
@@ -50,7 +50,9 @@ class Materias {
 
     // Método para obtener una materia por ID
     public function obtenerMateriaPorId($id) {
-        $query = "SELECT * FROM " . $this->table . " WHERE id = ?";
+        $query = "SELECT m.*, CONCAT(d.doce_apellido, ' ', d.doce_nombre) AS docente, c.carre_sigla  FROM " . $this->table . "  m 
+        JOIN carreras c ON m.carre_id = c.id 
+        JOIN docentes d ON m.doce_id = d.id WHERE m.id = ?";
         $stmt = $this->conn->prepare($query);
 
         // Verificar si la preparación de la declaración fue exitosa

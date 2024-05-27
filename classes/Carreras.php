@@ -34,7 +34,7 @@ class Carreras {
 
     // Método para obtener todas las carreras con el código de la facultad
     public function obtenerCarreras() {
-        $query = "SELECT c.id, c.carre_sigla, c.carre_nombre, f.facu_code 
+        $query = "SELECT c.id, c.carre_sigla, c.carre_nombre,c.facu_id, f.facu_code 
                   FROM " . $this->table . " c 
                   JOIN facultades f ON c.facu_id = f.id";
         $result = $this->conn->query($query);
@@ -49,7 +49,7 @@ class Carreras {
 
     // Método para obtener una carrera por ID
     public function obtenerCarreraPorId($id) {
-        $query = "SELECT * FROM " . $this->table . " WHERE id = ?";
+        $query = "SELECT c.*, f.facu_code FROM " . $this->table . " c JOIN facultades f ON c.facu_id = f.id  WHERE c.id = ?";
         $stmt = $this->conn->prepare($query);
 
         // Verificar si la preparación de la declaración fue exitosa
